@@ -10,11 +10,11 @@ data "ibm_resource_group" "logdna" {
   name = var.resource_group
 }
 
-module "logdna" {
-  source = "../../modules/logdna_instance"
+module "logdna_instance" {
+  source  = "terraform-ibm-modules/logdna/ibm//modules/instance"
 
   service_name        = var.service_name
-  resource_group_id   = data.ibm_resource_group.logdna.id
+  resource_group_id   = data.ibm_resource_group.logdna_resource_group.id
   plan                = var.plan
   region              = var.region
   service_endpoints   = var.service_endpoints
@@ -22,8 +22,8 @@ module "logdna" {
   parameters          = var.parameters
 }
 
-module "logdna_key" {
-  source = "../../modules/logdna_instance_key"
+module "logdna_instance-key" {
+  source  = "terraform-ibm-modules/logdna/ibm//modules/instance-key"
 
   resource_key_name       = var.resource_key_name
   resource_instance_id    = module.logdna.logdna_instance_id  
