@@ -10,8 +10,9 @@ data "ibm_resource_group" "logdna_resource_group" {
   name = var.resource_group
 }
 
-module "logdna" {
-  source = "../../modules/logdna_instance"
+
+module "logdna_instance" {
+  source  = "terraform-ibm-modules/logdna/ibm//modules/instance"
 
   service_name        = var.service_name
   resource_group_id   = data.ibm_resource_group.logdna_resource_group.id
